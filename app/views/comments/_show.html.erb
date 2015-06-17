@@ -1,0 +1,22 @@
+<ul class="comments">
+	<% if comments.present? %>
+		<% comments.each do |comment| %>
+			<li class="comment">
+				<p class="user">
+					<%= comment.user.name %>
+				</p>
+				<p class="body">
+				  <%= comment.body %>
+				</p>
+				<%= render partial: 'comments/show', locals: { comments: comment.comments }%>
+			</li>
+		<% end %>
+	<% end %>
+	
+	<li class="form">
+		<%= render partial: 'comments/form', locals: { comment: comments.build(article: @article) }%>
+	</li>
+
+</ul>
+
+

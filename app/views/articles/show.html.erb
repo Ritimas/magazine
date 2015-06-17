@@ -19,20 +19,4 @@
 <%= link_to 'Back', articles_path %>
 
 <h2>Comments</h2>
-<ul>
-	
-	<% @article.comments.each do |comment| %>
-		<li>
-			<div>
-				<%= comment.user.name %>
-			</div>
-			<p>
-			  <%= comment.body %>
-			</p>
-		</li>
-	<% end %>
-	<li>
-		<%= render partial: 'comments/form', locals: {comment: @article.comments.build }%>
-	</li>
-	
-</ul>
+<%= render partial: 'comments/show', locals: { comments: @article.comments.where(comment_id: nil) }%>
