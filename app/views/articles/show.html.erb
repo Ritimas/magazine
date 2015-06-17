@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @article.user_id %>
+  <strong>Author:</strong>
+  <%= @article.user.name %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
