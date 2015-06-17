@@ -7,8 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<div class="header">
+	<% if loggedin? %>
+		<span> <%= current_user.name %> (<%= link_to 'Log Out', logout_path(path: request.original_url), method: :delete, data: { confirm: 'Are you sure?' } %>) </span>
+	<% else %>
+		<span>
+		<a href="javascript:void(0);" id="login" > Login </a>
+		<%= render 'sessions/form' %>
+		</span>
+	<% end %>
+</div>
+<div class="body">
+	<%= yield %>
+</div>
 
 </body>
 </html>

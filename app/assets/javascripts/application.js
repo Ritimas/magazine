@@ -12,14 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 
 $(document).ready(function(){
 	$(".comments form").hide();
+	$("#loginForm").hide();
 	
 	$(this).on("click", "a.reply", function() {
 		$(this).siblings("form").toggle();
+	});
+	
+	$("#login").click(function() {
+		$("#loginForm").show();
 	});
 });
 
