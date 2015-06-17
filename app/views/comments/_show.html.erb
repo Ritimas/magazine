@@ -14,6 +14,7 @@
 	<% end %>
 	
 	<li class="form">
+		<a class="reply" href="javascript:void(0);">Reply</a>
 		<%= render partial: 'comments/form', locals: { comment: comments.build(article: @article) }%>
 	</li>
 
