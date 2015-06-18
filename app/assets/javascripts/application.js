@@ -22,8 +22,11 @@ $(document).ready(function(){
 		$(this).siblings("form").toggle();
 	});
 	
+	$(this).on("click", "a.delete",function(){
+		
+	})
+	
 	$("#login").click(function() {
 		$("#loginForm").show();
 	});
 });
-

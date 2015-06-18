@@ -2,8 +2,29 @@ class CommentsController < ApplicationController
   def create
     @comment = article.comments.new(comment_params)
     @comment.user = current_user
-    @comment.save
-    redirect_to @comment.article
+    if @comment.save
+      redirect_to @comment.article, notice: 'Comment was successfully added'
+    else
+      redirect_to @comment.article, notice: "Some error occured while adding the comment: #{comment.body}"
+    end
+  end
+  
+  def destroy
+    @comment = article.comments.find(params['id'])
+
+    if @comment.user_id == current_user.id and not @comment.comments.any?
+      @comment.destroy
+      
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Unable to delete comment' }
+        format.json { head :no_content }
+      end
+    end
   end
   
   private

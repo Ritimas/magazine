@@ -8,6 +8,9 @@
 				<p class="body">
 				  <%= comment.body %>
 				</p>
+				<p>
+				  <%= link_to('Remove', [@article, comment], method: :delete, data: { confirm: 'Are you sure?' })  if current_user.id==comment.user_id and not comment.comments.any? %>
+				</p>
 				<%= render partial: 'comments/show', locals: { comments: comment.comments }%>
 			</li>
 		<% end %>
@@ -15,6 +18,7 @@
 	
 	<li class="form">
 		<a class="reply" href="javascript:void(0);">Reply</a>
+        
 		<%= render partial: 'comments/form', locals: { comment: comments.build(article: @article) }%>
 	</li>
 
