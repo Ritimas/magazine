@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = article.comments.find(params['id'])
 
-    if @comment.user_id == current_user.id and not @comment.comments.any?
+    if @comment.editable_by?(current_user)
       @comment.destroy
       
       respond_to do |format|

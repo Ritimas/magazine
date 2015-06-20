@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
+<%= link_to 'Show', @user if @user.editable_by?(current_user) %> |
 <%= link_to 'Back', users_path %>

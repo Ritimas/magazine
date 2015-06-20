@@ -9,7 +9,7 @@
 				  <%= comment.body %>
 				</p>
 				<p>
-				  <%= link_to('Remove', [@article, comment], method: :delete, data: { confirm: 'Are you sure?' })  if current_user.id==comment.user_id and not comment.comments.any? %>
+				  <%= link_to('Remove', [@article, comment], method: :delete, data: { confirm: 'Are you sure?' })  if comment.editable_by?(current_user) %>
 				</p>
 				<%= render partial: 'comments/show', locals: { comments: comment.comments }%>
 			</li>

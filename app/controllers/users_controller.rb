@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  append_before_action :check_permission, only: [:destory, :edit, :update]
 
   # GET /users
   # GET /users.json
@@ -62,6 +63,12 @@ class UsersController < ApplicationController
   end
 
   private
+  def check_permission
+    redirect_to :back, notice: 'This action can only be performed by the author' unless @user.editable_by?(current_user)
+  rescue 
+    redirect_to users_path, notice: 'This action can only be performed by the author' unless @user.editable_by?(current_user)  
+  end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

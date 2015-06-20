@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  append_before_action :check_permission, only: [:destory, :edit, :update]
 
   # GET /articles
   # GET /articles.json
@@ -63,6 +64,12 @@ class ArticlesController < ApplicationController
   end
 
   private
+    def check_permission
+      redirect_to :back, notice: 'This action can only be performed by the author' unless @article.editable_by?(current_user)
+    rescue 
+      redirect_to articles_path, notice: 'This action can only be performed by the author' unless @article.editable_by?(current_user)  
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
